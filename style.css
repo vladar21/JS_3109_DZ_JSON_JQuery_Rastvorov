@@ -1,0 +1,142 @@
+
+body{
+  background: #ececec; 
+ }
+
+ img {
+  height: auto;
+  max-width: 100%;
+ }
+ .content{
+  margin-top: 50px;
+  margin-bottom: 25px;
+ }
+ .product {
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #c0c0c0;
+  max-height: auto;
+  overflow: hidden;
+  padding: 25px 15px;
+  /* position: relative; */
+  text-align: center;
+  transition: all 0.5s ease 0s;
+  /* margin-bottom: 20px; */
+ }
+ .product:hover {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+ }
+ /* .product-img {
+  height: 150px;
+  
+ } */
+ .product-title a {
+  color: #000;
+  font-weight: 500;
+  text-transform: uppercase;
+ }
+ .product-desc {
+  max-height: 60px;
+  overflow: hidden;
+ }
+ .product-price {
+  width: 100%;
+  color: #d51e08;
+  font-size: 18px;
+  font-weight: 500;
+ }
+
+ #loadImg{position:absolute; z-index:1000; display:none;}
+
+ /* Модальное окно */
+
+ .mod{
+   display: none;
+   position: fixed;
+   z-index: 1;
+   Left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0,0,0,0.7);
+ }
+ .mod-content{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -25%);
+   background-color: #fefefe;
+   margin:auto 15%;
+   padding:10px;
+   border:1px solid #888;
+   max-width:70%;   
+   color: #84878d;
+   font-family: "Roboto", "Open Sans", sans-serif;
+   font-size: 15px;
+   font-weight: 400;
+   line-height: normal;
+   /* box-sizing: border-box; */
+ }
+ .close{
+   color:#aaa;
+   float:right;
+   font-size:28px;
+   font-weight: bold;
+   cursor: pointer;  
+ }
+
+.close:hover span{
+  background-color: #ccc;
+}
+
+.breadcrumbs{
+  color: #84878d;
+  font-family: "Roboto", "Open Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+figure{
+  color: #84878d;
+  font-family: "Roboto", "Open Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+/* Details */
+
+.list-rectangle {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list-rectangle>li {
+  position: relative;
+  display: block;
+  margin-bottom: .25rem;
+  padding: .325rem .825rem .325rem 1.325rem;
+  color: #fff;
+  background: #C2185B;
+}
+.list-rectangle>li:last-child {
+  margin-bottom: 0;
+}
+.list-rectangle>li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.5rem;
+  background: #ec407a;
+}
