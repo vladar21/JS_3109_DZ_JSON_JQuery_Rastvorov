@@ -2,25 +2,37 @@
 class Page
 {
     constructor(){    
-        this.b = document.getElementById('body');
-        this.r1 = document.getElementById('rowfoundcontent');
+        //this.b = document.getElementById('body');
+        this.b = $('body');
+        //this.r1 = document.getElementById('rowfoundcontent');
+        this.r1 = $('#rowfoundcontent');
     
-        if (!this.r1) {
-            var f1 = document.createElement('div');
-            f1.className = "container content col-sm-12 col-md-12 products";
-            f1.id = "foundedcontent";
-            this.b.appendChild(f1);
+        
+
+        if (this.r1.length == 0) {
+            
+            //var f1 = document.createElement('div');
+            //f1.className = "container content col-sm-12 col-md-12 products";
+            //f1.id = "foundedcontent";
+            var f1 = $('<div>');
+            
+            $(f1).addClass('container content col-sm-12 col-md-12 products').attr('id','foundedcontent');
+            //this.b.appendChild(f1);
+            $(this.b).append(f1);
+          
     
             this.r1 = document.createElement('div');
             this.r1.className = "row";
             this.r1.id = "rowfoundcontent";
-            f1.appendChild(this.r1);
+            $(f1).append(this.r1);
+            //f1.appendChild(this.r1);
         }
     }
 
     // выводим дивы с обложкой, названием и годом создания очередной порции фильмов
     // results - выдача поиска (MovieSearch.doSearch()), data - параметры поисковой строки нужны для формирвоания More
-    addpage(results, data) {        
+    addpage(results, data) {  
+        debugger      
         var root = this.r1;     
         var sumsearch = results['totalResults']; 
         var search = results['Search'];   
@@ -28,6 +40,7 @@ class Page
         // Запрос       
     
         for (let i = 0; i < formax; i++) {
+            debugger
             let id = search[i]['imdbID'];       
             let title = search[i]['Title'];
             let type = search[i]['Type'];
@@ -36,47 +49,75 @@ class Page
     
             // Создаем карточку фильма                             
     
-            var d3 = document.createElement('div');
-            d3.className = "col-sm-4 col-md-3";           
-            root.appendChild(d3);
+            //var d3 = document.createElement('div');
+            //d3.className = "col-sm-4 col-md-3";           
+            //root.appendChild(d3);
+            var d3 = $('<div>');
+            $(d3).addClass('col-sm-4 col-md-3');
+            $(root).append(d3);
     
-            var d4 = document.createElement('div');
-            d4.className = "product";
-            d3.appendChild(d4);
+            //var d4 = document.createElement('div');
+            //d4.className = "product";
+            //d3.appendChild(d4);
+            var d4 = $('<div>');
+            $(d4).addClass('product');
+            $(d3).append(d4);
+
+            // var d5 = document.createElement('div');
+            // d5.className = "product-img";
+            // d5.id = id;
+            // d5.setAttribute('onclick', 'openmodal(this)');
+            // d4.appendChild(d5);
+            var d5 = $('<div>');
+            $(d5).addClass('product-img').attr('id', id).attr('onclick', 'openmodal(this)');
+            $(d4).append(d5);
     
-            var d5 = document.createElement('div');
-            d5.className = "product-img";
-            d5.id = id;
-            d5.setAttribute('onclick', 'openmodal(this)');
-            d4.appendChild(d5);
+            // var img = document.createElement('img');
+            // img.src = poster;
+            // d5.appendChild(img);
+            var img = $('<img/>');
+            $(img).attr('src', poster);
+            $(d5).append(img);
     
-            var img = document.createElement('img');
-            img.src = poster;
-            d5.appendChild(img);
+            // var span1 = document.createElement('span');
+            // span1.className = "product-title";
+            // d4.appendChild(span1);
+            var span11 = $('<span>').addClass('product-title');
+            $(d4).append(span11);
     
-            var span1 = document.createElement('span');
-            span1.className = "product-title";
-            d4.appendChild(span1);
+            // var h5 = document.createElement('h5');
+            // span1.appendChild(h5);
+            var h5 = $('<h5>');
+            $(h5).text(title);
+            $(span11).append(h5);
     
-            var h5 = document.createElement('h5');
-            span1.appendChild(h5);
+            // var a1 = document.createElement('a');
+            // a1.textContent = title;
+            // h5.appendChild(a1);
+            //var a1 = $('a').text(title);
+            //$(h5).append(a1);
     
-            var a1 = document.createElement('a');
-            a1.textContent = title;
-            h5.appendChild(a1);
+            // var span2 = document.createElement('span');
+            // span2.className = "product-desc";
+            // span2.textContent = type;
+            // d4.appendChild(span2);
+            var span2 = $('<span>');
+            $(span2).addClass('product-desc').text(type);
+            $(d4).append(span2);
     
-            var span2 = document.createElement('span');
-            span2.className = "product-desc";
-            span2.textContent = type;
-            d4.appendChild(span2);
+            // var br = document.createElement('br');
+            // d4.appendChild(br);
+            var br = $('<br/>');
+            $(d4).append(br);
     
-            var br = document.createElement('br');
-            d4.appendChild(br);
-    
-            var span3 = document.createElement('span');
-            span2.className = "product-price";
-            span2.textContent = year;
-            d4.appendChild(span3);
+            // var span3 = document.createElement('span');
+            // span2.className = "product-price";
+            // span2.textContent = year;
+            // d4.appendChild(span3);
+            var span3 = $('<span>');
+            $(span3).addClass('product-price').text(year);
+            $(d4).append(span3);
+            
         }
 
         // удаляем предыдущий More ...   
@@ -85,32 +126,48 @@ class Page
     
         // созадем новый More ...
         if (sumsearch > 10) {
-            var dm = document.createElement('div');
-            dm.className = "col-sm-4 col-md-3";
-            dm.id = "idmore";
-            root.appendChild(dm);
+            // var dm = document.createElement('div');
+            // dm.className = "col-sm-4 col-md-3";
+            // dm.id = "idmore";
+            // root.appendChild(dm);
+            var dm = $('<div>');
+            $(dm).addClass('col-sm-4 col-md-3').attr('id', 'idmore');
+            $(root).append(dm);
     
-            var dm1 = document.createElement('div');
-            dm1.className = "product";
-            dm1.style = "margin-top:50%;font-style:italic;";
-           
+            // var dm1 = document.createElement('div');
+            // dm1.className = "product";
+            // dm1.style = "margin-top:50%;font-style:italic;";
+            var dm1 = $('<div>');
+            $(dm).append(dm1);
+            $(dm1).addClass('product');
+            $(dm1).css({'margin-top':'50%','font-style':'italic'});
             // формируем данные для следующей порции фильмов
             data.p++;            
-            dm1.setAttribute('onclick', 'more('+JSON.stringify(data)+', '+JSON.stringify(this) +')');
-            dm.appendChild(dm1);
+            // dm1.setAttribute('onclick', 'more('+JSON.stringify(data)+', '+JSON.stringify(this) +')');
+            // dm.appendChild(dm1);
+            $(dm1).attr('onclick', 'more('+JSON.stringify(data)+')');         
     
-            var spana = document.createElement('span');
-            spana.textContent = 'more ...';
-            dm1.appendChild(spana);
+            // var spana = document.createElement('span');
+            // spana.textContent = 'more ...';
+            // dm1.appendChild(spana);
+            var spana = $('<span>');
+            $(spana).text('more ...');
+            $(dm1).append(spana);
+
+            // var dimg = document.createElement('div');
+            // dimg.className = "product-img";
+            // spana.appendChild(dimg);
+            var dimg = $('<div>');
+            $(dimg).addClass('product-img');
+            $(spana).append(dimg);            
     
-            var dimg = document.createElement('div');
-            dimg.className = "product-img";
-            spana.appendChild(dimg);
-    
-            var img = document.createElement('img');
-            img.src = "ajax-loader.gif";
-            img.id = "loadImg";
-            dimg.appendChild(img);
+            // var img = document.createElement('img');
+            // img.src = "ajax-loader.gif";
+            // img.id = "loadImg";
+            // dimg.appendChild(img);
+            var img = $('<img/>');
+            $(img).attr('src', 'ajax-loader.gif').attr('id', 'loadImg');
+            $(dimg).append(img);   
         }    
        
     }    
