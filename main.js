@@ -2,30 +2,21 @@
 class Page
 {
     constructor(){    
-        //this.b = document.getElementById('body');
+        // готовим страницу для вывода результатов запроса
         this.b = $('body');
-        //this.r1 = document.getElementById('rowfoundcontent');
-        this.r1 = $('#rowfoundcontent');
-    
-        
+        this.r1 = $('#rowfoundcontent');        
 
         if (this.r1.length == 0) {
             
-            //var f1 = document.createElement('div');
-            //f1.className = "container content col-sm-12 col-md-12 products";
-            //f1.id = "foundedcontent";
             var f1 = $('<div>');
             
             $(f1).addClass('container content col-sm-12 col-md-12 products').attr('id','foundedcontent');
-            //this.b.appendChild(f1);
-            $(this.b).append(f1);
-          
+            $(this.b).append(f1);          
     
             this.r1 = document.createElement('div');
             this.r1.className = "row";
             this.r1.id = "rowfoundcontent";
             $(f1).append(this.r1);
-            //f1.appendChild(this.r1);
         }
     }
 
@@ -36,8 +27,7 @@ class Page
         var root = this.r1;     
         var sumsearch = results['totalResults']; 
         var search = results['Search'];   
-        var formax = search.length <= 10 ? search.length : 10;
-        // Запрос       
+        var formax = search.length <= 10 ? search.length : 10;       
     
         for (let i = 0; i < formax; i++) {
             debugger
@@ -49,122 +39,68 @@ class Page
     
             // Создаем карточку фильма                             
     
-            //var d3 = document.createElement('div');
-            //d3.className = "col-sm-4 col-md-3";           
-            //root.appendChild(d3);
             var d3 = $('<div>');
             $(d3).addClass('col-sm-4 col-md-3');
             $(root).append(d3);
     
-            //var d4 = document.createElement('div');
-            //d4.className = "product";
-            //d3.appendChild(d4);
             var d4 = $('<div>');
             $(d4).addClass('product');
             $(d3).append(d4);
 
-            // var d5 = document.createElement('div');
-            // d5.className = "product-img";
-            // d5.id = id;
-            // d5.setAttribute('onclick', 'openmodal(this)');
-            // d4.appendChild(d5);
             var d5 = $('<div>');
             $(d5).addClass('product-img').attr('id', id).attr('onclick', 'openmodal(this)');
             $(d4).append(d5);
     
-            // var img = document.createElement('img');
-            // img.src = poster;
-            // d5.appendChild(img);
             var img = $('<img/>');
             $(img).attr('src', poster);
             $(d5).append(img);
     
-            // var span1 = document.createElement('span');
-            // span1.className = "product-title";
-            // d4.appendChild(span1);
             var span11 = $('<span>').addClass('product-title');
             $(d4).append(span11);
     
-            // var h5 = document.createElement('h5');
-            // span1.appendChild(h5);
             var h5 = $('<h5>');
             $(h5).text(title);
             $(span11).append(h5);
-    
-            // var a1 = document.createElement('a');
-            // a1.textContent = title;
-            // h5.appendChild(a1);
-            //var a1 = $('a').text(title);
-            //$(h5).append(a1);
-    
-            // var span2 = document.createElement('span');
-            // span2.className = "product-desc";
-            // span2.textContent = type;
-            // d4.appendChild(span2);
+
             var span2 = $('<span>');
             $(span2).addClass('product-desc').text(type);
             $(d4).append(span2);
     
-            // var br = document.createElement('br');
-            // d4.appendChild(br);
             var br = $('<br/>');
             $(d4).append(br);
     
-            // var span3 = document.createElement('span');
-            // span2.className = "product-price";
-            // span2.textContent = year;
-            // d4.appendChild(span3);
             var span3 = $('<span>');
             $(span3).addClass('product-price').text(year);
             $(d4).append(span3);
             
         }
 
-        // удаляем предыдущий More ...   
-        var mid = document.getElementById('idmore');
-        if (mid) mid.remove(document);
+        // удаляем предыдущий More ..., если он есть
+        var mid = $('#idmore');
+        if (mid) $(mid).remove();
     
         // созадем новый More ...
         if (sumsearch > 10) {
-            // var dm = document.createElement('div');
-            // dm.className = "col-sm-4 col-md-3";
-            // dm.id = "idmore";
-            // root.appendChild(dm);
             var dm = $('<div>');
             $(dm).addClass('col-sm-4 col-md-3').attr('id', 'idmore');
             $(root).append(dm);
     
-            // var dm1 = document.createElement('div');
-            // dm1.className = "product";
-            // dm1.style = "margin-top:50%;font-style:italic;";
             var dm1 = $('<div>');
             $(dm).append(dm1);
             $(dm1).addClass('product');
             $(dm1).css({'margin-top':'50%','font-style':'italic'});
             // формируем данные для следующей порции фильмов
-            data.p++;            
-            // dm1.setAttribute('onclick', 'more('+JSON.stringify(data)+', '+JSON.stringify(this) +')');
-            // dm.appendChild(dm1);
+            data.p++;
             $(dm1).attr('onclick', 'more('+JSON.stringify(data)+')');         
     
-            // var spana = document.createElement('span');
-            // spana.textContent = 'more ...';
-            // dm1.appendChild(spana);
             var spana = $('<span>');
             $(spana).text('more ...');
             $(dm1).append(spana);
 
-            // var dimg = document.createElement('div');
-            // dimg.className = "product-img";
-            // spana.appendChild(dimg);
             var dimg = $('<div>');
             $(dimg).addClass('product-img');
-            $(spana).append(dimg);            
-    
-            // var img = document.createElement('img');
-            // img.src = "ajax-loader.gif";
-            // img.id = "loadImg";
-            // dimg.appendChild(img);
+            $(spana).append(dimg);     
+
             var img = $('<img/>');
             $(img).attr('src', 'ajax-loader.gif').attr('id', 'loadImg');
             $(dimg).append(img);   
@@ -194,8 +130,6 @@ class MovieSearch
     doSearch(){
         let data = this.data;
         const xmlhttp = new XMLHttpRequest();
-        // меняем номер страницв в запросе на следующий
-        // this.next;
         
         xmlhttp.open("GET", this.queryString, true);        
         xmlhttp.onreadystatechange = function(){
@@ -284,67 +218,66 @@ function openmodal(div) {
             var resp = JSON.parse(jasonhttp.response);
 
             // Формируем содержание модального окна
-            var posterimg = document.getElementById('idposter');
-            posterimg.src = resp.Poster;
-            posterimg.alt = resp.Title;
-            var titlemovie = document.getElementById('idtitlecontent');
-            titlemovie.innerHTML = resp.Title;
-            var titlemoviemodal = document.getElementById('idtitlemodal');
-            titlemoviemodal.innerHTML = resp.Title;
-            var summarymovie = document.getElementById('idsummary');
-            summarymovie.innerHTML = resp.Plot;
-            var actors = document.getElementById('idActors');
-            actors.innerHTML = "<b>Actors:</b> " + resp.Actors;
-            var awards = document.getElementById("idAwards");
-            awards.innerHTML = "<b>Awards:</b> " + resp.Awards;
-            var BoxOffice = document.getElementById("idBoxOffice");
-            BoxOffice.innerHTML = "<b>BoxOffice:</b> " + resp.BoxOffice;
-            var country = document.getElementById("idCountry");
-            country.innerHTML = "<b>Country:</b> " + resp.Country;
-            var DVD = document.getElementById("idDVD");
-            DVD.innerHTML = "<b>DVD:</b> " + resp.DVD;
-            var director = document.getElementById("idDirector");
-            director.innerHTML = "<b>Director:</b> " + resp.Director;
-            var genre = document.getElementById("idGenre");
-            genre.innerHTML = "<b>Genre:</b> " + resp.Genre;
-            var language = document.getElementById("idLanguage");
-            language.innerHTML = "<b>Language:</b> " + resp.Language;
-            var production = document.getElementById("idProduction");
-            production.innerHTML = "<b>Production:</b> " + resp.Production;
-            var rated = document.getElementById("idRated");
-            rated.innerHTML = "<b>Rated:</b> " + resp.Rated;
-            var ratings = document.getElementById("idRatings");
+            var postering = $('#idposter');
+            $(postering).attr('src', resp.Poster).attr('alt', resp.Title);
+            var titlemovie = $('#idtitlecontent');
+            $(titlemovie).html(resp.Title);
+            var titlemoviemodal = $('#idtitlemodal');
+            $(titlemoviemodal).html(resp.Title);
+            var summarymovie = $('#idsummary');
+            $(summarymovie).html(resp.Plot);
+            var actors = $('#idActors');
+            $(actors).html("<b>Actors:</b> " + resp.Actors);
+            var awards = $('#idAwards');
+            $(awards).html("<b>Awards:</b> " + resp.Awards);
+            var BoxOffice = $('#idBoxOffice');
+            $(BoxOffice).html("<b>BoxOffice:</b> " + resp.BoxOffice);
+            var country = $('#idCountry');
+            $(country).html("<b>Country:</b> " + resp.Country);
+            var DVD = $('#idDVD');
+            $(DVD).html("<b>DVD:</b> " + resp.DVD);
+            var director = $('#idDirector');
+            $(director).html("<b>Director:</b> " + resp.Director);
+            var genre = $('#idGenre');
+            $(genre).html("<b>Genre:</b> " + resp.Genre);
+            var language = $('#idLanguage');
+            $(language).html("<b>Language:</b> " + resp.Language);
+            var production = $('#idProduction');
+            $(production).html("<b>Production:</b> " + resp.Production);
+            var rated = $('#idRated');
+            $(rated).html("<b>Rated:</b> " + resp.Rated);
+            var ratings = $('#idRatings');
             // Выводим рейтинги
             if (resp.Ratings.length > 1) {
-                ratings.innerHTML = "<b>Ratings:</b>";
-                var nul = document.createElement('ul');
-                ratings.appendChild(nul);
+                $(ratings).html("<b>Ratings:</b>");
+                var nul = $('<ul>');
+                $(ratings).append(nul);
                 for (let i = 0; i < resp.Ratings.length; i++) {
-                    var nl = document.createElement('li');
-                    nl.innerHTML = '<b>' + resp.Ratings[i].Source + '</b>, ' + resp.Ratings[i].Value;
-                    nul.appendChild(nl);
+                    var nl = $('<li>');
+                    $(nl).html('<b>' + resp.Ratings[i].Source + '</b>, ' + resp.Ratings[i].Value);
+                    $(nul).append(nl);
                 }
             } else {
-                ratings.innerHTML = "<b>Ratings:</b> " + resp.Ratings;
+                $(ratings).html("<b>Ratings:</b> " + resp.Ratings);
             }
-            var released = document.getElementById("idReleased");
-            released.innerHTML = "<b>Released:</b> " + resp.Released;
-            var runtime = document.getElementById("idRuntime");
-            runtime.innerHTML = "<b>Runtime:</b> " + resp.Runtime;
-            var type = document.getElementById("idType");
-            type.innerHTML = "<b>Type:</b> " + resp.Type;
-            var website = document.getElementById("idWebsite");
-            website.innerHTML = "<b>Website:</b> " + resp.Website;
-            var writer = document.getElementById("idWriter");
-            writer.innerHTML = "<b>Writer:</b> " + resp.Writer;
-            var year = document.getElementById("idYear");
-            year.innerHTML = "<b>Year:</b> " + resp.Year;
-            var imdbID = document.getElementById("idImdbID");
-            imdbID.innerHTML = "<b>imdbID:</b> " + resp.imdbID;
-            var imdbRating = document.getElementById("idImdbRating");
-            imdbRating.innerHTML = "<b>imdbRating:</b> " + resp.imdbRating;
-            var imdbVotes = document.getElementById("idImdbVotes");
-            imdbVotes.innerHTML = "<b>imdbVotes:</b> " + resp.imdbVotes;
+            var released = $('#idReleased');
+            $(released).html("<b>Released:</b> " + resp.Released);
+            var runtime = $('#idRuntime');
+            $(runtime).html("<b>Runtime:</b> " + resp.Runtime);
+            var type = $('#idType');
+            $(type).html("<b>Type:</b> " + resp.Type);
+            var website = $('#idWebsite');
+            $(website).html("<b>Website:</b> " + resp.Website);
+            var writer = $('#idWriter');
+            $(writer).html("<b>Writer:</b> " + resp.Writer);
+            var year = $('#idYear');
+            $(year).html("<b>Year:</b> " + resp.Year);
+            var imdbID = $('#idImdbID');
+            $(imdbID).html("<b>imdbID:</b> " + resp.imdbID);
+            var imdbRating = $('#idImdbRating');
+            $(imdbRating).html("<b>imdbRating:</b> " + resp.imdbRating);;
+            var imdbVotes = $('#idImdbVotes');
+            $(imdbVotes).html("<b>imdbVotes:</b> " + resp.imdbVotes);
         }
     }
     jasonhttp.send(null)    
@@ -352,6 +285,6 @@ function openmodal(div) {
 
 // закрываем модальное окно
 function closemodal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "none";
+    var modal = $('#myModal');
+    $(modal).css("display", "none");
 }
