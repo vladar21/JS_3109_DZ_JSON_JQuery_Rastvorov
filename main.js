@@ -23,14 +23,14 @@ class Page
     // выводим дивы с обложкой, названием и годом создания очередной порции фильмов
     // results - выдача поиска (MovieSearch.doSearch()), data - параметры поисковой строки нужны для формирвоания More
     addpage(results, data) {  
-        debugger      
+              
         var root = this.r1;     
         var sumsearch = results['totalResults']; 
         var search = results['Search'];   
         var formax = search.length <= 10 ? search.length : 10;       
     
         for (let i = 0; i < formax; i++) {
-            debugger
+            
             let id = search[i]['imdbID'];       
             let title = search[i]['Title'];
             let type = search[i]['Type'];
